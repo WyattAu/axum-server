@@ -26,7 +26,7 @@ pub async fn serve(app: Router, addr: &str) -> Result<(), ServerError> {
     info!("Server listening on {}", addr);
 
     axum::serve(listener, app)
-        .with_graceful_shutdown(graceful_shutdown::shutdown_signal())
+        .with_graceful_shutdown(shutdown_kit::shutdown_signal())
         .await
         .map_err(|e| ServerError::Serve(e.to_string()))?;
 
